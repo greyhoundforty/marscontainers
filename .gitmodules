@@ -1,4 +1,0 @@
-[submodule "prometheus"]
-	path = prometheus
-	url = git@github.com:greyhoundforty/prometheus.git
-	branch = master
