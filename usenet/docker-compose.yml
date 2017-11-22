@@ -1,0 +1,60 @@
+version: '2'
+services:
+    nginx-proxy:
+        image: jwilder/nginx-proxy:latest
+        container_name: nginx-proxy
+        volumes:
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+        ports:
+            - 80:80
+        restart: always
+
+    sabnzbd:
+        image: linuxserver/sabnzbd:latest
+        container_name: sabnzbd
+        volumes:
+            - ~/media/config/sabnzbd:/config
+            - ~/media/Downloads/complete:/downloads
+            - ~/media/Downloads/incomplete:/incomplete-downloads
+        ports:
+            - 8050:8080
+        env_file: uidgid.env
+        environment:
+            - EDGE=1
+            - VIRTUAL_HOST=sabnzbd.tinylab.info
+            - VIRTUAL_PORT=8050
+        restart: always
+
+    sonarr:
+        image: linuxserver/sonarr
+        container_name: sonarr
+        volumes:
+            - ~/media/config/sonarr:/config
+            - /etc/localtime:/etc/localtime:ro
+            - ~/media/TV:/tv
+            - ~/media/Downloads/complete:/downloads
+        ports:
+            - 8989:8989
+        env_file: uidgid.env
+        environment:
+            - VIRTUAL_HOST=sonarr.tinylab.info
+            - VIRTUAL_PORT=8989
+        restart: always
+
+    nzbhydra:
+        image: linuxserver/hydra
+        container_name: nzbhydra
+        volumes:
+            - ~/media/config/nzbhydra:/config
+            - ~/media/Downloads:/downloads
+            - /etc/localtime:/etc/localtime:ro
+        ports:
+            - 5075:5075
+        env_file: uidgid.env
+        environment:
+            - VIRTUAL_HOST=nzbhydra.tinylab.info
+            - VIRTUAL_PORT=5075
+        restart: always
+
+
+
