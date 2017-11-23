@@ -13,3 +13,7 @@ You would update the file to be:
 PGID=1000
 PUID=1000
 ```
+
+## Deploy containers
+
+`docker-compose up -d`
