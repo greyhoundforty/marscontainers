@@ -8,3 +8,7 @@ Edit the `config.monitoring` file with the password you'd like to use to access 
 ## Deploy containers
 
 `docker-compose up -d`
+
+## Grafana Dashboard
+
+![container dashboard](https://dsc.cloud/quickshare/dashboard.png)
